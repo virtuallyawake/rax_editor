@@ -1,4 +1,4 @@
 rax_editor
 ==========
 
-Experimenting with ACE and syntax highlighting
+Experimenting with socket.io and term.js
