@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAX Playground</title>
+    <!-- Bootstrap: Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+
+    <style type="text/css">
+      #editorIn, #editorOut { 
+        height: 300px;
+        border-radius: 4px;
+        border-bottom-right-radius: 0px;
+        margin-top: 0px;
+      }
+      #editorIn {
+        border: 1px solid #000;      
+      }
+      #editorOut {
+        border: 1px solid #DDD;      
+      }
+    </style>
+  </head>
+  <body>
+    <header class="jumbotron">
+      <div class="container">
+	<h1>RAX Playground</h1>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+	<div class="col-md-3">
+	  <ul class="nav nav-pills nav-stacked">
+	    <li><a href="#">Item 1</a></li>
+	    <li><a href="#">Item 2</a></li>
+	</div>
+	<div class="col-md-9">
+	  <div id="editorIn">
+	  function foo(items) {
+	  var x = "All this is syntax highlighted";
+	  return x;
+	  }
+	  </div>
+	  <div>
+	    <button type="button" class="btn btn-success
+	    btn-block">Execute RAX script</button>
+	  </div>
+	  <div id="editorOut">
+	  function foo(items) {
+	    var x = "Output here";
+	    return x;
+	  }
+	  </div>
+	</div>
+      </div>
+    </div>
+    <script src="http://ace.ajax.org/build/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      // Editor for input scripts
+      var editorIn = ace.edit("editorIn");
+      editorIn.setTheme("ace/theme/twilight");
+      editorIn.getSession().setMode("ace/mode/javascript");
+
+      // Editor for the output of running the input scripts
+      var editorOut = ace.edit("editorOut");
+      editorOut.setTheme("ace/theme/github");
+      editorOut.getSession().setMode("ace/mode/javascript");
+    </script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap: Latest compiled and minified JavaScript -->
+    <script src="javascripts/bootstrap.min.js"></script>
+  </body>
+</html>

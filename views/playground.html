@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAX Playground</title>
+    <!-- Bootstrap: Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <header class="jumbotron">
+      <div class="container">
+	<h1>RAX Live Demo</h1>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+	<div class="col-md-3">
+	  <ul class="nav nav-pills nav-stacked">
+	    <li><a href="#">Item 1</a></li>
+	    <li><a href="#">Item 2</a></li>
+	</div>
+	<div class="col-md-9">
+	  <div id="terminal">
+	  </div>
+	</div>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="term.js"></script>
+    <script>
+      ;(function() {
+      window.onload = function() {
+	var socket = io.connect();
+	socket.on('connect', function() {
+	  var term = new Terminal({
+	    cols: 80,
+            rows: 24,
+            useStyle: true,
+	    screenKeys: true
+	  });
+
+	  term.on('data', function(data) {
+	    socket.emit('data', data);
+	  });
+  
+	  term.on('title', function(title) {
+	    document.title = title;
+	  });
+
+	  term.open(document.getElementById("terminal"));
+
+	  term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
+
+	  socket.on('data', function(data) {
+	    term.write(data);
+	  });
+  
+	  socket.on('disconnect', function() {
+	    term.destroy();
+	  });
+	});
+    };
+  }).call(this);
+  </script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap: Latest compiled and minified JavaScript -->
+    <script src="javascripts/bootstrap.min.js"></script>
+  </body>
+</html>
