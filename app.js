@@ -40,34 +40,14 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 
 /**
- * Fork RAX process as a terminal. 
+ * Sockets
  */
-
-var buff = []
-  , socket
-  , term;
-
-term = pty.fork('rax', [], {});
-
-term.on('data', function(data) {
-  return !socket
-    ? buff.push(data)
-    : io.sockets.emit('data', data); // used to be socket.emit
-});
-
-con:qsole.log(''
-  + 'Created shell with pty master/slave'
-  + ' pair (master: %d, pid: %d)',
-  term.fd, term.pid);
-
-/**
-* Sockets
-*/
 
 io = io.listen(server);
 
-io.sockets.on('connection', function(sock) {
-  socket = sock;
+io.sockets.on('connection', function(socket) {
+
+  console.log("Socket id: " + socket.id);
 
   socket.on('data', function(data) {
     console.log(data);
@@ -77,9 +57,14 @@ io.sockets.on('connection', function(sock) {
   socket.on('disconnect', function() {
     socket = null;
   });
-  
-  while (buff.length) {
-    //console.log('connection: ' + buff.shift() + ' ... end');
-    socket.emit('data', buff.shift());
-  }
+
+  /**
+   * Fork RAX process as a terminal. 
+   */
+
+   var term = pty.fork('rax', [], {});
+
+   term.on('data', function(data) {
+      return socket.emit('data', data);
+   });
 });

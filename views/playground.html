@@ -7,25 +7,88 @@
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
 
     <style type="text/css">
+      .terminal {
+	font-size: 14px;
+	border: #000 solid 5px;
+	box-shadow: 0px 5px 20px #555;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+      }
+      #terminal {
+	height: 500px;
+        top: 8:Wq0px;
+      }
+      .terminal-wrapper {
+        height: 500px;
+      }
+      .navbar {
+	background-color: #035;
+      }
+      .navbar-brand {
+        color: #fff;
+        font-size: 36px;
+      }
+      .navbar-nav {
+	color: #d1d1d1;
+        font-size: 32px;
+        font-weight: 200
+      }
+      .sidebar .nav {
+	background-color: #f5f5f5;
+        -moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 250px;
+        top: 80px;
+      }
+      .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+	color: #fff;
+	background-color: #78a;
+      }
     </style>
   </head>
   <body>
-    <header class="jumbotron">
-      <div class="container">
-	<h1>RAX Live Demo</h1>
-      </div>
-    </header>
+    <header class="navbar navbar-fixed-top"
+	role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse"
+	      data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../" class="navbar-brand">Rax</a>
+    </div>
+    <nav class="collapse navbar-collapse"
+	 role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="../getting-started">Live Demo</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
     <div class="container">
       <div class="row">
-	<div class="col-md-3">
-	  <ul class="nav nav-pills nav-stacked">
-	    <li><a href="#">Item 1</a></li>
-	    <li><a href="#">Item 2</a></li>
+	<div class="sidebar col-md-3">
+	  <ul class="nav nav-pills nav-stacked" data-spy="affix">
+	    <li><a href="#" data-toggle="pill">Getting started</a></li>
+	    <li><a href="#" data-toggle="pill">How-to #1</a></li>
+	  </ul>
 	</div>
-	<div class="col-md-9">
-	  <div id="terminal">
-	  </div>
+	<div class="terminal-wrapper col-md-9">
+	  <div id="terminal" data-spy="affix"></div>
 	</div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+	<p>
+	    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+	 </p>
       </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
@@ -47,12 +110,10 @@
 	  });
   
 	  term.on('title', function(title) {
-	    document.title = title;
+	    //document.title = title;
 	  });
 
 	  term.open(document.getElementById("terminal"));
-
-	  term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
 
 	  socket.on('data', function(data) {
 	    term.write(data);
