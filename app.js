@@ -55,7 +55,7 @@ term.on('data', function(data) {
     : io.sockets.emit('data', data); // used to be socket.emit
 });
 
-con:qsole.log(''
+console.log(''
   + 'Created shell with pty master/slave'
   + ' pair (master: %d, pid: %d)',
   term.fd, term.pid);
