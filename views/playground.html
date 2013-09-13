@@ -5,45 +5,7 @@
     <title>RAX Playground</title>
     <!-- Bootstrap: Latest compiled and minified CSS -->
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
-
-    <style type="text/css">
-      .terminal {
-	font-size: 14px;
-	border: #000 solid 5px;
-	box-shadow: 0px 5px 20px #555;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-      }
-      #terminal {
-	height: 500px;
-        top: 8:Wq0px;
-      }
-      .terminal-wrapper {
-        height: 500px;
-      }
-      .navbar {
-	background-color: #035;
-      }
-      .navbar-brand {
-        color: #fff;
-        font-size: 36px;
-      }
-      .navbar-nav {
-	color: #d1d1d1;
-        font-size: 32px;
-        font-weight: 200
-      }
-      .sidebar .nav {
-	background-color: #f5f5f5;
-        -moz-border-radius: 5px;
-	border-radius: 5px;
-	width: 250px;
-        top: 80px;
-      }
-      .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
-	color: #fff;
-	background-color: #78a;
-      }
+    <link rel="stylesheet" href="stylesheets/style.css">
     </style>
   </head>
   <body>
@@ -60,7 +22,7 @@
       </button>
       <a href="../" class="navbar-brand">Rax</a>
     </div>
-    <nav class="collapse navbar-collapse"
+    <nav class="collapse navbar-collapse bs-navbar-collapse"
 	 role="navigation">
       <ul class="nav navbar-nav">
         <li>
@@ -75,8 +37,8 @@
       <div class="row">
 	<div class="sidebar col-md-3">
 	  <ul class="nav nav-pills nav-stacked" data-spy="affix">
-	    <li><a href="#" data-toggle="pill">Getting started</a></li>
-	    <li><a href="#" data-toggle="pill">How-to #1</a></li>
+	    <li><a href="#getting-started" data-toggle="pill">Getting started</a></li>
+	    <li><a href="#how-to-1">How-to #1</a></li>
 	  </ul>
 	</div>
 	<div class="terminal-wrapper col-md-9">
@@ -84,52 +46,26 @@
 	</div>
       </div>
     </div>
-    <div class="container">
+    <div class="container"> 
       <div class="row">
-	<p>
-	    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-	 </p>
+	<div class="col-md-9 col-md-offset-3">
+	  <% include gettingStarted.html %>
+	  <% include howTo#1.html %>
+	</div>
       </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="term.js"></script>
-    <script>
-      ;(function() {
-      window.onload = function() {
-	var socket = io.connect();
-	socket.on('connect', function() {
-	  var term = new Terminal({
-	    cols: 80,
-            rows: 24,
-            useStyle: true,
-	    screenKeys: true
-	  });
-
-	  term.on('data', function(data) {
-	    socket.emit('data', data);
-	  });
-  
-	  term.on('title', function(title) {
-	    //document.title = title;
-	  });
-
-	  term.open(document.getElementById("terminal"));
-
-	  socket.on('data', function(data) {
-	    term.write(data);
-	  });
-  
-	  socket.on('disconnect', function() {
-	    term.destroy();
-	  });
-	});
-    };
-  }).call(this);
-  </script>
-
+    <script src="term.js"></script>    
+    <script src="javascripts/connectTerminal.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Bootstrap: Latest compiled and minified JavaScript -->
     <script src="javascripts/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+      
+      });
+    </script>
+
   </body>
 </html>
