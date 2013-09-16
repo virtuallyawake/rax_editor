@@ -9,8 +9,7 @@
     </style>
   </head>
   <body>
-    <header class="navbar navbar-fixed-top"
-	role="banner">
+    <header class="navbar navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse"
@@ -20,13 +19,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="../" class="navbar-brand">Rax</a>
+      <a href="#" class="navbar-brand">Rax</a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse"
 	 role="navigation">
       <ul class="nav navbar-nav">
         <li>
-          <a href="../getting-started">Live Demo</a>
+          <a href="#how-to-1">Live Demo</a>
         </li>
       </ul>
     </nav>
@@ -37,7 +36,7 @@
       <div class="row">
 	<div class="sidebar col-md-3">
 	  <ul class="nav nav-pills nav-stacked" data-spy="affix">
-	    <li><a href="#getting-started" data-toggle="pill">Getting started</a></li>
+	    <li><a href="#getting-started">Getting started</a></li>
 	    <li><a href="#how-to-1">How-to #1</a></li>
 	  </ul>
 	</div>
@@ -48,7 +47,7 @@
     </div>
     <div class="container"> 
       <div class="row">
-	<div class="col-md-9 col-md-offset-3">
+	<div class="col-md-9 col-md-offset-3" id="documentation">
 	  <% include gettingStarted.html %>
 	  <% include howTo#1.html %>
 	</div>
@@ -63,7 +62,10 @@
     <script src="javascripts/bootstrap.min.js"></script>
     <script>
       $(function() {
-      
+        $('#documentation [href=#]').click(function (e) {
+          console.log("Prevent default");
+          e.preventDefault();
+        });      
       });
     </script>
 
