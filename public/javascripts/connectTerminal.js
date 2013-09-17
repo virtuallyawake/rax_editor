@@ -3,7 +3,7 @@
 	var socket = io.connect();
 	socket.on('connect', function() {
 	  var term = new Terminal({
-	    cols: 80,
+	    cols: 105,
             rows: 24,
             useStyle: true,
 	    screenKeys: true

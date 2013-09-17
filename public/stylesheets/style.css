@@ -1,3 +1,11 @@
+      /**
+       * Fixes redraw issue with affix plugin:
+       * http://stackoverflow.com/questions/14493533/really-weird-redraw-behavior-with-anchor-links-twitter-bootstrap-fixed-navbar
+       */
+      .affix,.navbar-fixed-top {
+        -webkit-transform: scale3d(1,1,1);
+      }
+
       .terminal {
 	font-size: 14px;
 	border: #000 solid 5px;
