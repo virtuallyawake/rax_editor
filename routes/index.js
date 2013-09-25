@@ -8,12 +8,12 @@ var async = require('async');
 var path = require('path');
 
 exports.index = function(req, res, next){
-  var docDir = "docSections/";
   var viewsPath = path.resolve(__dirname, "../views") + "/";
+  var docDir = "docSections/";
   var docPath = viewsPath + docDir;
   console.log("docPath: " + docPath);
 
-  function getSectionData(filenames, cb) {
+  function getSectionData(filenamesString, cb) {
 
     function capitaliseFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -27,21 +27,23 @@ exports.index = function(req, res, next){
 	sectionName: sectionName
       });
     }
-
+    
+    console.log("FilenamesString: " + filenamesString);
+    var filenames = filenamesString.trim().split("\n");
     async.map(filenames, getSectionName, function(err, sections) {
       cb(err, sections);
     });
   }
   
-  var listSections = async.compose(getSectionData, fs.readdir);
-  listSections(docPath, function(err, sections) {
+  var listSections = async.compose(getSectionData, fs.readFile);
+  listSections(docPath+"sectionList.txt", "utf8", function(err, sections) {
     if (err)
       return next(new Error("Something borked"));
     
     var includeSections = sections.map(function(section) {
       return "<% include " + section.filename + " %>";
     });
-    console.log(includeSections);
+    console.log(sections);
     
     res.render('playground');
   });
