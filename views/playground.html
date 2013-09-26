@@ -36,8 +36,9 @@
       <div class="row">
 	<div class="sidebar col-md-3">
 	  <ul class="nav nav-pills nav-stacked" data-spy="affix">
-	    <li><a href="#getting-started">Getting started</a></li>
-	    <li><a href="#how-to-1">How-to #1</a></li>
+	    <% sections.forEach(function(section) { %>
+	      <li><a href="#<%= section.anchorId %>" ><%= section.sectionName %></a></li>
+	    <% }) %>
 	  </ul>
 	</div>
 	<div class="terminal-wrapper col-md-9">

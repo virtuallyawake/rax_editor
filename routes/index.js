@@ -24,7 +24,8 @@ exports.index = function(req, res, next){
       var sectionName = capitaliseFirstLetter(basename.replace(/-/g, " "));
       cb(null, {
         filename: docDir + filename,
-	sectionName: sectionName
+	sectionName: sectionName,
+	anchorId: basename
       });
     }
     
@@ -45,6 +46,6 @@ exports.index = function(req, res, next){
     });
     console.log(sections);
     
-    res.render('playground');
+    res.render('playground', {sections: sections});
   });
 };
