@@ -11,6 +11,17 @@ var path = require('path');
 var terminal = require('term.js');
 var pty = require('pty.js');
 var io = require('socket.io');
+var execFile = require('child_process').execFile;
+
+// Generate docs (views/sections.html) from the sections in views/docSections
+execFile('./generateDocs.sh', // bash script that generates docs
+  function (error, stdout, stderr) {  // capture data/errors
+    console.log('./generateDocs.sh: stdout: ' + stdout);
+    if (stderr)
+       console.log('./generateDocs.sh: stderr: ' + stderr);
+    if (error)
+       console.log('exec error: ' + error);
+});
 
 var app = express();
 
